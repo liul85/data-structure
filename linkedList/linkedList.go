@@ -1,48 +1,48 @@
 package linkedList
 
 type Node struct {
-	Next *Node
-	Data interface{}
+	next *Node
+	data interface{}
 }
 
 type LinkedList struct {
-	Head *Node
+	head *Node
 }
 
 func (list *LinkedList) Append(data interface{}) {
-	node := Node{Data: data}
+	node := Node{data: data}
 
-	if list.Head == nil {
-		list.Head = &node
+	if list.head == nil {
+		list.head = &node
 	} else {
-		list.getLast().Next = &node
+		list.getLast().next = &node
 	}
 }
 
 func (list *LinkedList) getLast() *Node {
-	node := list.Head
+	node := list.head
 	for {
-		if node.Next == nil {
+		if node.next == nil {
 			return node
 		}
-		node = node.Next
+		node = node.next
 	}
 }
 
 func (list *LinkedList) Get(i int) (interface{}, interface{}) {
 	p := 1
-	node := list.Head
+	node := list.head
 
 	for {
 		if i == p && node != nil {
-			return nil, node.Data
+			return nil, node.data
 		}
 
-		if node == nil || node.Next == nil {
+		if node == nil || node.next == nil {
 			return "not found", nil
 		}
 
-		node = node.Next
+		node = node.next
 		p++
 	}
 }

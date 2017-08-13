@@ -7,8 +7,8 @@ import (
 func TestEmptyLinkedList(t *testing.T) {
 	list := LinkedList{}
 
-	if list.Head != nil {
-		t.Errorf("expect nil, acturl is %v", list.Head)
+	if list.head != nil {
+		t.Errorf("expect nil, acturl is %v", list.head)
 	}
 }
 
@@ -17,8 +17,8 @@ func TestAppendOneElemToEmptyLinkedList(t *testing.T) {
 
 	list.Append(1)
 
-	if list.Head.Data != 1 {
-		t.Errorf("expect data equals 1, actual is %v", list.Head.Data)
+	if list.head.data != 1 {
+		t.Errorf("expect data equals 1, actual is %v", list.head.data)
 	}
 }
 
@@ -27,8 +27,8 @@ func TestAppendOneElemToNoneEmptyLinkedList(t *testing.T) {
 	list.Append(1)
 	list.Append(2)
 
-	if list.Head.Next.Data != 2 {
-		t.Errorf("expect data equals 2, actual is %v", list.Head.Next.Data)
+	if list.head.next.data != 2 {
+		t.Errorf("expect data equals 2, actual is %v", list.head.next.data)
 	}
 }
 
