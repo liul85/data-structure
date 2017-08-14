@@ -102,10 +102,18 @@ func TestInsertElemInNoneEmptyList(t *testing.T) {
 
 	list.Insert(9, 2)
 
-	err, value := list.Get(2)
+	var err, value interface{}
+
+	err, value = list.Get(2)
 
 	if err != nil || value != 9 {
 		t.Errorf("expected 9, but got %v\n", value)
+	}
+
+	err, value = list.Get(3)
+
+	if err != nil || value != 3 {
+		t.Errorf("expected 3, but got %v\n", value)
 	}
 }
 

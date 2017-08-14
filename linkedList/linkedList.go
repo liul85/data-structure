@@ -74,8 +74,7 @@ func (list *LinkedList) Insert(data interface{}, index int64) interface{} {
 	}
 
 	newNode := Node{data: data}
-	newNode.next = prevNode.next
-	prevNode.next = &newNode
+	prevNode.next, newNode.next = &newNode, prevNode.next
 
 	return nil
 }
