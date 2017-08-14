@@ -1,5 +1,9 @@
 package linkedList
 
+import (
+	"fmt"
+)
+
 type Node struct {
 	next *Node
 	data interface{}
@@ -75,6 +79,28 @@ func (list *LinkedList) Insert(data interface{}, index int64) interface{} {
 
 	newNode := Node{data: data}
 	prevNode.next, newNode.next = &newNode, prevNode.next
+
+	return nil
+}
+
+func (list *LinkedList) Del(index int64) interface{} {
+	err, node := list.getNode(index)
+	if err != nil {
+		return fmt.Sprintf("can not get deleted node: %s", err)
+	}
+
+	if index == 0 {
+		list.head = node.next
+		return nil
+	}
+
+	e, prevNode := list.getNode(index - 1)
+
+	if e != nil {
+		return fmt.Sprintf("can not get prev node of deleted: %s", e)
+	}
+
+	prevNode.next = node.next
 
 	return nil
 }

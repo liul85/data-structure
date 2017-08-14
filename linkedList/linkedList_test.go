@@ -148,3 +148,89 @@ func TestInsertElemToTailOfLink(t *testing.T) {
 		t.Errorf("expected 5, but got %v\n", data)
 	}
 }
+
+func TestDelElemInEmptyList(t *testing.T) {
+	list := LinkedList{}
+
+	err := list.Del(3)
+
+	if err == nil {
+		t.Error("expected err, but got nil")
+	}
+}
+
+func TestDelHeadWhenLengthIsOne(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(1)
+
+	err := list.Del(0)
+
+	if err != nil {
+		t.Errorf("expected success, got err: %v", err)
+	}
+
+	if e, data := list.Get(0); e == nil || data != nil {
+		t.Error("not empty list after delete head.")
+	}
+}
+
+func TestDelHeadWhenLengthMoreThanOne(t *testing.T) {
+	list := LinkedList{}
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	err := list.Del(0)
+
+	if err != nil {
+		t.Errorf("Error happend when delete head: %v\n", err)
+	}
+
+	e, data := list.Get(0)
+
+	if e != nil || data != 2 {
+		t.Errorf("Expected 2, but got %v\n", data)
+	}
+
+}
+
+func TestDelElem(t *testing.T) {
+	list := LinkedList{}
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	list.Append(4)
+	list.Append(5)
+
+	err := list.Del(2)
+
+	if err != nil {
+		t.Errorf("Error happend when delete head: %v\n", err)
+	}
+
+	e, data := list.Get(2)
+
+	if e != nil || data != 4 {
+		t.Errorf("Expected 4, but got %v\n", data)
+	}
+}
+
+func TestDelTail(t *testing.T) {
+	list := LinkedList{}
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	err := list.Del(2)
+
+	if err != nil {
+		t.Errorf("Error happend when delete head: %v\n", err)
+	}
+
+	e, data := list.Get(2)
+
+	if e == nil || data != nil {
+		t.Errorf("Expected nil, but got %v\n", data)
+	}
+}
