@@ -131,3 +131,20 @@ func TestInsertElemInNonEmptyListWithErr(t *testing.T) {
 		t.Errorf("expected err, but got nil")
 	}
 }
+
+func TestInsertElemToTailOfLink(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	list.Append(4)
+
+	list.Insert(5, 4)
+
+	err, data := list.Get(4)
+
+	if err != nil || data != 5 {
+		t.Errorf("expected 5, but got %v\n", data)
+	}
+}
