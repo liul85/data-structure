@@ -40,7 +40,7 @@ func TestGetElemFromList(t *testing.T) {
 	list.Append(4)
 	list.Append(5)
 
-	err, value := list.Get(4)
+	err, value := list.Get(3)
 
 	if value != 4 || err != nil {
 		t.Errorf("expected 4, but got %v\n", value)
@@ -67,5 +67,59 @@ func TestGetElemFromEmptyList(t *testing.T) {
 
 	if value != nil || err == nil {
 		t.Errorf("expected nil, but got %v\n", value)
+	}
+}
+
+func TestInsertElemInEmptyList(t *testing.T) {
+	list := LinkedList{}
+
+	list.Insert(1, 0)
+
+	err, value := list.Get(0)
+
+	if value != 1 || err != nil {
+		t.Errorf("expected 1, but got %v\n", value)
+	}
+}
+
+func TestInsertElemInEmptyListWithErr(t *testing.T) {
+	list := LinkedList{}
+
+	err := list.Insert(1, 9)
+
+	if err == nil {
+		t.Error("expected got error, but got nil\n")
+	}
+}
+
+func TestInsertElemInNoneEmptyList(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	list.Append(4)
+
+	list.Insert(9, 2)
+
+	err, value := list.Get(2)
+
+	if err != nil || value != 9 {
+		t.Errorf("expected 9, but got %v\n", value)
+	}
+}
+
+func TestInsertElemInNonEmptyListWithErr(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	list.Append(4)
+
+	err := list.Insert(88, 9)
+
+	if err == nil {
+		t.Errorf("expected err, but got nil")
 	}
 }
