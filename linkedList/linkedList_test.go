@@ -234,3 +234,25 @@ func TestDelTail(t *testing.T) {
 		t.Errorf("Expected nil, but got %v\n", data)
 	}
 }
+
+func TestLengthOfEmptyList(t *testing.T) {
+	list := LinkedList{}
+
+	length := list.Length()
+
+	if length != 0 {
+		t.Errorf("expected length 0, got %v\n", length)
+	}
+}
+
+func TestLengthOfNoneEmtpyList(t *testing.T) {
+	list := LinkedList{}
+	list.Append(1)
+	list.Append(2)
+
+	length := list.Length()
+
+	if length != 2 {
+		t.Errorf("expected length 2, but got %v\n", length)
+	}
+}

@@ -104,3 +104,16 @@ func (list *LinkedList) Del(index int64) interface{} {
 
 	return nil
 }
+
+func (list *LinkedList) Length() int64 {
+	var length int64
+	node := list.head
+	for {
+		if node != nil {
+			node = node.next
+		} else {
+			return length
+		}
+		length++
+	}
+}
