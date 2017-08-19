@@ -23,3 +23,11 @@ func (stack *Stack) Pop() (interface{}, interface{}) {
 	stack.top = stack.top.next
 	return nil, data
 }
+
+func New(args ...interface{}) *Stack {
+	stack := Stack{}
+	for _, n := range args {
+		stack.Push(n)
+	}
+	return &stack
+}

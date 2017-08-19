@@ -69,3 +69,11 @@ func TestPopMoreFromStack(t *testing.T) {
 		t.Errorf("Expected 2, but got %v", data3)
 	}
 }
+
+func TestNewStack(t *testing.T) {
+	stack := New(2, 3, 6, 9)
+
+	if stack.top.data != 9 {
+		t.Error("Failed to new stack")
+	}
+}
