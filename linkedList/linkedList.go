@@ -117,3 +117,11 @@ func (list *LinkedList) Length() int64 {
 		length++
 	}
 }
+
+func New(arg ...interface{}) *LinkedList {
+	list := LinkedList{}
+	for _, n := range arg {
+		list.Append(n)
+	}
+	return &list
+}

@@ -256,3 +256,16 @@ func TestLengthOfNoneEmtpyList(t *testing.T) {
 		t.Errorf("expected length 2, but got %v\n", length)
 	}
 }
+
+func TestCreateListWithData(t *testing.T) {
+	list := New(1, 2, 3, 4, 5)
+	length := list.Length()
+	if length != 5 {
+		t.Errorf("Expected 5, but got %v\n", length)
+	}
+
+	_, data := list.Get(2)
+	if data != 3 {
+		t.Errorf("Expected 3, but got %v\n", data)
+	}
+}
