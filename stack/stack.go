@@ -31,3 +31,33 @@ func New(args ...interface{}) *Stack {
 	}
 	return &stack
 }
+
+func (stack *Stack) Empty() bool {
+	return stack.top == nil
+}
+
+func (stack *Stack) GetTop() interface{} {
+	if stack.Empty() {
+		return nil
+	}
+
+	return stack.top.data
+}
+
+func (stack *Stack) Length() int64 {
+	if stack.Empty() {
+		return 0
+	}
+
+	var length int64 = 1
+	node := stack.top
+
+	for {
+		if node.next != nil {
+			node = node.next
+			length++
+		} else {
+			return length
+		}
+	}
+}
