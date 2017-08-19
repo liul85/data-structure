@@ -9,13 +9,13 @@ type Stack struct {
 	top *Node
 }
 
-func (stack *Stack) push(data interface{}) {
+func (stack *Stack) Push(data interface{}) {
 	newNode := Node{data: data}
 	newNode.next = stack.top
 	stack.top = &newNode
 }
 
-func (stack *Stack) pop() (interface{}, interface{}) {
+func (stack *Stack) Pop() (interface{}, interface{}) {
 	if stack.top == nil {
 		return "Empty stack", nil
 	}
