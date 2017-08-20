@@ -11,21 +11,57 @@ type queue struct {
 }
 
 func New(args ...interface{}) *queue {
-	queue := &queue{}
+	q := &queue{}
 	for _, v := range args {
-		queue.Enqueue(v)
+		q.Enqueue(v)
 	}
 
-	return queue
+	return q
 }
 
-func (queue *queue) Enqueue(data interface{}) {
+func (q *queue) Enqueue(data interface{}) {
 	node := &node{data: data}
-	if queue.head == nil && queue.tail == nil {
-		queue.head = node
-		queue.tail = node
+	if q.IsEmpty() {
+		q.head = node
+		q.tail = node
 	} else {
-		queue.tail.next = node
-		queue.tail = node
+		q.tail.next = node
+		q.tail = node
+	}
+}
+
+func (q *queue) Dequeue() (interface{}, interface{}) {
+	if q.IsEmpty() {
+		return "empty queue", nil
+	}
+
+	data := q.head.data
+
+	if q.head == q.tail {
+		q.tail = nil
+	}
+
+	q.head = q.head.next
+	return nil, data
+}
+
+func (q *queue) IsEmpty() bool {
+	return q.head == nil && q.tail == nil
+}
+
+func (q *queue) Length() int64 {
+	if q.IsEmpty() {
+		return 0
+	}
+
+	var length int64 = 1
+	node := q.head
+	for {
+		if node.next != nil {
+			length++
+			node = node.next
+		} else {
+			return length
+		}
 	}
 }
