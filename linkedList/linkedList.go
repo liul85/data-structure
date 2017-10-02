@@ -1,6 +1,7 @@
 package linkedList
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -33,7 +34,7 @@ func (list *LinkedList) getLast() *Node {
 	}
 }
 
-func (list *LinkedList) Get(i int64) (interface{}, interface{}) {
+func (list *LinkedList) Get(i int64) (error, interface{}) {
 	err, node := list.getNode(i)
 
 	if err != nil {
@@ -43,7 +44,7 @@ func (list *LinkedList) Get(i int64) (interface{}, interface{}) {
 	return nil, node.data
 }
 
-func (list *LinkedList) getNode(i int64) (interface{}, *Node) {
+func (list *LinkedList) getNode(i int64) (error, *Node) {
 	var p int64
 	node := list.head
 
@@ -53,7 +54,7 @@ func (list *LinkedList) getNode(i int64) (interface{}, *Node) {
 		}
 
 		if node == nil || node.next == nil {
-			return "not found", nil
+			return errors.New("not found"), nil
 		}
 
 		node = node.next
@@ -61,20 +62,20 @@ func (list *LinkedList) getNode(i int64) (interface{}, *Node) {
 	}
 }
 
-func (list *LinkedList) Insert(data interface{}, index int64) interface{} {
+func (list *LinkedList) Insert(data interface{}, index int64) error {
 	if list.head == nil {
 		if index == 0 {
 			list.head = &Node{data: data}
 			return nil
 		}
 
-		return "can't insert to empty list with index more than 0."
+		return errors.New("can't insert to empty list with index more than 0.")
 	}
 
 	err, prevNode := list.getNode(index - 1)
 
 	if err != nil {
-		return "can not insert to list."
+		return errors.New("can not insert to list.")
 	}
 
 	newNode := Node{data: data}
@@ -83,10 +84,10 @@ func (list *LinkedList) Insert(data interface{}, index int64) interface{} {
 	return nil
 }
 
-func (list *LinkedList) Del(index int64) interface{} {
+func (list *LinkedList) Del(index int64) error {
 	err, node := list.getNode(index)
 	if err != nil {
-		return fmt.Sprintf("can not get deleted node: %s", err)
+		return errors.New(fmt.Sprintf("can not get deleted node: %s", err))
 	}
 
 	if index == 0 {
@@ -97,7 +98,7 @@ func (list *LinkedList) Del(index int64) interface{} {
 	e, prevNode := list.getNode(index - 1)
 
 	if e != nil {
-		return fmt.Sprintf("can not get prev node of deleted: %s", e)
+		return errors.New(fmt.Sprintf("can not get prev node of deleted: %s", e))
 	}
 
 	prevNode.next = node.next

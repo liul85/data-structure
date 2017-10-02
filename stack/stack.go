@@ -1,5 +1,9 @@
 package stack
 
+import (
+	"errors"
+)
+
 type Node struct {
 	data interface{}
 	next *Node
@@ -15,9 +19,9 @@ func (stack *Stack) Push(data interface{}) {
 	stack.top = &newNode
 }
 
-func (stack *Stack) Pop() (interface{}, interface{}) {
+func (stack *Stack) Pop() (error, interface{}) {
 	if stack.top == nil {
-		return "Empty stack", nil
+		return errors.New("Empty stack"), nil
 	}
 	data := stack.top.data
 	stack.top = stack.top.next

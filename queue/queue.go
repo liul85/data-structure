@@ -1,5 +1,9 @@
 package queue
 
+import (
+	"errors"
+)
+
 type node struct {
 	data interface{}
 	next *node
@@ -30,9 +34,9 @@ func (q *queue) Enqueue(data interface{}) {
 	}
 }
 
-func (q *queue) Dequeue() (interface{}, interface{}) {
+func (q *queue) Dequeue() (error, interface{}) {
 	if q.IsEmpty() {
-		return "empty queue", nil
+		return errors.New("empty queue"), nil
 	}
 
 	data := q.head.data
