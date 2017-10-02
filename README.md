@@ -16,3 +16,14 @@ basic implementations with golang
 * New
 * Push
 * Pop
+
+### Queue
+* New
+* Enqueue
+* Dequeue
+* IsEmpty
+* Length
+
+### Binary Tree
+* New
+* Pre-order traverse

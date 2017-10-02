@@ -1,38 +1,9 @@
 package binarytree
 
-import (
-	"fmt"
-)
-
 type binaryTree struct {
 	data   interface{}
 	lchild *binaryTree
 	rchild *binaryTree
-}
-
-func createTree(tree *binaryTree, data *[]interface{}) {
-	if len(*data) == 0 {
-		return
-	}
-
-	v := (*data)[:1][0]
-	*data = (*data)[1:]
-
-	if fmt.Sprintf("%s", v) == "#" {
-		return
-	}
-
-	tree.data = v
-
-	if tree.lchild == nil {
-		tree.lchild = &binaryTree{}
-		createTree(tree.lchild, data)
-	}
-
-	if tree.rchild == nil {
-		tree.rchild = &binaryTree{}
-		createTree(tree.rchild, data)
-	}
 }
 
 func PreOrderNew(data []interface{}) *binaryTree {

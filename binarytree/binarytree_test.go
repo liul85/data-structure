@@ -1,7 +1,6 @@
 package binarytree
 
 import (
-	"reflect"
 	"testing"
 )
 
@@ -47,16 +46,5 @@ func TestPreOrderWithLRchild(t *testing.T) {
 
 	if result[0] != "A" || result[1] != "B" || result[2] != "C" {
 		t.Errorf("got wrong traverse data")
-	}
-}
-
-func TestCreateTree(t *testing.T) {
-	tree := &binaryTree{}
-	createTree(tree, &[]interface{}{"A", "B", "D", "H", "#", "K", "#", "E", "C", "F", "I", "#", "G", "#", "J"})
-	result := PreOrderTraverse(*tree)
-
-	expected := []interface{}{"A", "B", "D", "H", "K", "E", "C", "F", "I", "G", "J"}
-	if !reflect.DeepEqual(result, expected) {
-		t.Errorf("Tree is not correctly created. expected: %v, actual is %v", expected, result)
 	}
 }
